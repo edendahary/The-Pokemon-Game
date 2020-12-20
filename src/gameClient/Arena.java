@@ -1,9 +1,6 @@
 package gameClient;
 
-import api.directed_weighted_graph;
-import api.edge_data;
-import api.geo_location;
-import api.node_data;
+import api.*;
 import gameClient.util.Point3D;
 import gameClient.util.Range;
 import gameClient.util.Range2D;
@@ -27,19 +24,28 @@ public class Arena {
 	private List<CL_Agent> _agents;
 	private List<CL_Pokemon> _pokemons;
 	private List<String> _info;
+	private game_service game;
 	private static Point3D MIN = new Point3D(0, 100,0);
 	private static Point3D MAX = new Point3D(0, 100,0);
 
-	public Arena() {;
+	public Arena() {
 		_info = new ArrayList<String>();
 	}
-	private Arena(directed_weighted_graph g, List<CL_Agent> r, List<CL_Pokemon> p) {
+	public Arena(game_service gs) {
+		this.game=gs;
+		_info = new ArrayList<String>();
+	}
+	private Arena(game_service gs ,directed_weighted_graph g, List<CL_Agent> r, List<CL_Pokemon> p) {
+		this. game =gs;
 		_gg = g;
 		this.setAgents(r);
 		this.setPokemons(p);
 	}
 	public void setPokemons(List<CL_Pokemon> f) {
 		this._pokemons = f;
+	}
+	public game_service getGame() {
+		return this.game;
 	}
 	public void setAgents(List<CL_Agent> f) {
 		this._agents = f;

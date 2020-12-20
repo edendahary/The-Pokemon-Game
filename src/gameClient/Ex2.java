@@ -95,7 +95,7 @@ public class Ex2 implements Runnable, ActionListener {
         dw_graph_algorithms gg = new DWGraph_Algo();
         String fs = game.getPokemons();
         gg.load(g);
-        _ar = new Arena();
+        _ar = new Arena(game);
         _ar.setGraph(gg.getGraph());
         _ar.setPokemons(Arena.json2Pokemons(fs));
         _win = new MyFrame("Ex2");
@@ -144,7 +144,7 @@ public class Ex2 implements Runnable, ActionListener {
                 int src = ag.getSrcNode();
                 double v = ag.getValue();
                 if(dest==-1) {
-                    dest = nextNode(gg, src,ffs,log);
+                    dest = nextNode(gg, src,ffs);
                     path = ga.shortestPath(src, dest);
                     if (path!=null) {
                         for (node_data curr : path) {
@@ -155,7 +155,7 @@ public class Ex2 implements Runnable, ActionListener {
                 }
             }
         }
-    private static int nextNode(directed_weighted_graph g, int src,List<CL_Pokemon> P ,List<CL_Agent> A) {
+    private static int nextNode(directed_weighted_graph g, int src,List<CL_Pokemon> P) {
         double dist;
         double MinDist= Double.MAX_VALUE;
         dw_graph_algorithms ga = new DWGraph_Algo();

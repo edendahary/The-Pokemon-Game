@@ -42,6 +42,7 @@ public class MyPanel extends JPanel {
         drawgraph(g);
         drawPokemon(g);
         drawAgents(g);
+        drawTime(g);
     }
     private void drawgraph(Graphics g) {
         directed_weighted_graph gg = _ar.getGraph();
@@ -105,6 +106,14 @@ public class MyPanel extends JPanel {
                 g.drawString(pokemon_s, (int)fp.x()+r,(int) fp.y()-r);
             }
         }
+    }
+    private void drawTime(Graphics g){
+        long time = _ar.getGame().timeToEnd();
+        double mod = time%10;
+        mod=mod/10;
+        double new_time = time/1000+mod;
+        String t = "Time : " +new_time ;
+        g.drawString(t,this.getWidth()-600,50);
     }
 
 }

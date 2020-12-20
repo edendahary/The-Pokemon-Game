@@ -20,6 +20,9 @@ public class  DWGraph_DS implements directed_weighted_graph{
 
     @Override
     public edge_data getEdge(int src, int dest) {
+        if(src == dest){
+            return null;
+        }
         if(this.Graph.containsKey(this.MapNode.get(src))==false){
             return null;
         }
@@ -33,6 +36,9 @@ public class  DWGraph_DS implements directed_weighted_graph{
 
     @Override
     public void connect(int src, int dest, double w) {
+        if(src == dest){
+            return;
+        }
         if(this.MapNode.containsKey(src) && this.MapNode.containsKey(dest)) {
             if (this.Graph.containsKey(this.MapNode.get(src))){
                 if(!this.Graph.get(this.MapNode.get(src)).containsKey(dest)){
@@ -87,8 +93,15 @@ public class  DWGraph_DS implements directed_weighted_graph{
 
     @Override
     public edge_data removeEdge(int src, int dest) {
+        if(src == dest ){
+            return null;
+        }
         edge_data e =this.Graph.get(this.MapNode.get(src)).get(dest);
+        if(e == null){
+            return null;
+        }
         this.Graph.get(this.MapNode.get(src)).remove(dest);
+        ES--;
         return e;
     }
 

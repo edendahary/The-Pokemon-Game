@@ -147,9 +147,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         directed_weighted_graph g = new DWGraph_DS();
 
         try {
-//            Scanner scanner = new Scanner(new File(file));
-//            String jsonString = scanner.useDelimiter("\\A").next();
-//            scanner.close();
+
             JSONObject obj_JsonObject = new JSONObject(file);
             JSONArray jsonArrayEdges = obj_JsonObject.getJSONArray("Edges"); // Array for the vertexes
             JSONArray jsonArrayNodes = obj_JsonObject.getJSONArray("Nodes");// Array for the edges
@@ -231,30 +229,5 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         }
 
         return new DijkstraResult(dist, prev);
-    }
-
-    public static void main(String[] args) {
-        directed_weighted_graph graph = new DWGraph_DS();
-        graph.addNode(new NodeData(0));
-        graph.addNode(new NodeData(1));
-        graph.addNode(new NodeData(2));
-        graph.addNode(new NodeData(3));
-        graph.connect(0,1,2);
-        graph.connect(0,2,2);
-        graph.connect(0,3,2);
-        graph.connect(1,0,2);
-        graph.connect(1,2,2);
-        graph.connect(1,3,2);
-        graph.connect(2,0,2);
-       graph.connect(2,1,2);
-        graph.connect(2,3,2);
-        graph.connect(3,0,2);
-       graph.connect(3,1,2);
-        graph.connect(3,2,2);
-
-        dw_graph_algorithms g = new DWGraph_Algo();
-        g.init(graph);
-        System.out.println(g.isConnected());
-
     }
 }
