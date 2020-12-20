@@ -83,6 +83,19 @@ implement this Grpah Algorithms with a private class that called DijkstraResult 
 | `save()` | Saves a graph to a file|
 | `load()` | Load a graph |
 
+## The Pokemon Game
+
+In this Game your mission is to capture pokemon as much as you could till there is enough time to get a good grade with your agents.
+In order to do so i implement an dijaksra algorithim that gives me the shortest path from each pokemon to thier agents.
+
+In order to play the game you need to write the following commend : git clone https://github.com/edendahary/Ex2-OOP.git .
+
+After this you will have to enter your ID and the scenario level, there are 23 scenario from 0-23.
+
+you can try to do a better grade then me,
+
+Good Luck with this.
+
 
 
 
