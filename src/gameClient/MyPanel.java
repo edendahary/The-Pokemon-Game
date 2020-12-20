@@ -14,9 +14,10 @@ import java.util.List;
 public class MyPanel extends JPanel {
     private Arena _ar;
     private gameClient.util.Range2Range _w2f;
-    public MyPanel() {
+    public MyPanel(){
         super();
     }
+
 
     public void update(Arena ar) {
         this._ar = ar;

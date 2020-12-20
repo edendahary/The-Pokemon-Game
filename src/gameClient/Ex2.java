@@ -5,20 +5,61 @@ import api.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
-public class Ex2 implements Runnable {
+public class Ex2 implements Runnable, ActionListener {
     private static MyFrame _win;
     private static Arena _ar;
+    private static JTextField tf;
+    private static JLabel l;
+    private static JLabel l1;
+    private static JButton b;
+    private int scenario ;
+    private	int id;
+    private static JTextField idText;
+
     public static void main(String[] args) {
-        Thread client = new Thread(new Ex2());
-        client.start();
+        JPanel Panel= new JPanel();
+        JFrame Frame= new JFrame();
+        Frame.setSize(400, 200);
+        Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Panel.setLayout(null);
+        Panel.setBackground(Color.green);
+        l=new JLabel("ID :");
+        l.setBounds(10, 20, 80, 25);
+        l1=new JLabel("Game Number :");
+        l1.setBounds(10, 50, 100, 25);
+        idText= new JTextField(20);
+        idText.setBounds(100, 20, 165, 25);
+        Panel.add(idText);
+        tf= new JTextField();
+        tf.setBounds(100, 50, 165, 25);
+        b= new JButton("Go");
+        b.setBounds(130,100,80,25);
+        b.addActionListener(new Ex2());
+        Panel.add(tf);
+        Panel.add(l1);
+        Panel.add(l);
+        Panel.add(b);
+        Frame.add(Panel);
+        Frame.setVisible(true);
+    }
+    public Ex2(){}
+    public Ex2(int id, int scenario_num) {
+        this.scenario = scenario_num;
+        this.id = id;
     }
     @Override
     public void run() {
-        int level_number =15;
-        game_service game = Game_Server_Ex2.getServer(level_number);
-        //game.login(312274244);
+        game_service game = Game_Server_Ex2.getServer(scenario);
+        game.login(id);
         String g = game.getGraph();
         String pks = game.getPokemons();
         dw_graph_algorithms gg = new DWGraph_Algo();
@@ -26,7 +67,7 @@ public class Ex2 implements Runnable {
         init(game);
 
         game.startGame();
-        _win.setTitle("Ex2 - OOP: Eden Dahary  "+game.toString());
+        _win.setTitle("Ex2 - OOP: Pokemon ");
         int ind=0;
         long dt=100;
 
@@ -57,7 +98,7 @@ public class Ex2 implements Runnable {
         _ar = new Arena();
         _ar.setGraph(gg.getGraph());
         _ar.setPokemons(Arena.json2Pokemons(fs));
-        _win = new MyFrame("test Ex2");
+        _win = new MyFrame("Ex2");
         _win.setSize(1000, 700);
         _win.update(_ar);
         _win.show();
@@ -75,7 +116,7 @@ public class Ex2 implements Runnable {
             for(int a = 0;a<AmountOfAgents;a++) {
                 CL_Pokemon CurrPoke = PokemonQueue.poll();
                 int nn = CurrPoke.get_edge().getDest();
-                if(CurrPoke.getType()<0 ) {nn = CurrPoke.get_edge().getSrc();}
+                if(CurrPoke.getType() < 0) {nn = CurrPoke.get_edge().getSrc();}
                 game.addAgent(nn);
             }
         }
@@ -120,7 +161,6 @@ public class Ex2 implements Runnable {
         dw_graph_algorithms ga = new DWGraph_Algo();
         ga.init(g);
         int ans = -1;
-        int PokeDist;
         Queue <CL_Pokemon>PokemonQueue = ToQueue(P,ga);
         while(!PokemonQueue.isEmpty()){
             CL_Pokemon Poke =PokemonQueue.poll();
@@ -140,6 +180,7 @@ public class Ex2 implements Runnable {
 
                     }
                 }else if (!PokemonQueue.isEmpty()){
+                    MinDist= Double.MAX_VALUE;
                     continue;
                 }
 
@@ -169,5 +210,14 @@ public class Ex2 implements Runnable {
         }
         return PokemonQueue;
     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+            String SenText = tf.getText();
+            int Sen = Integer.parseInt(SenText);
+                String idT = idText.getText();
+                int idTT = Integer.parseInt(idT);
+                Thread game1 = new Thread(new Ex2(idTT, Sen));
+                game1.start();
+        }
 
 }

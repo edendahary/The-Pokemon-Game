@@ -19,7 +19,7 @@ public class CL_Agent {
 		private node_data _curr_node;
 		private directed_weighted_graph _gg;
 		private CL_Pokemon _curr_fruit;
-		private long _sg_dt;
+		private double dist;
 		
 		private double _value;
 
@@ -149,31 +149,32 @@ public class CL_Agent {
 		public void set_curr_fruit(CL_Pokemon curr_fruit) {
 			this._curr_fruit = curr_fruit;
 		}
-		public void set_SDT(long ddtt) {
-			long ddt = ddtt;
-			if(this._curr_edge!=null) {
-				double w = get_curr_edge().getWeight();
-				geo_location dest = _gg.getNode(get_curr_edge().getDest()).getLocation();
-				geo_location src = _gg.getNode(get_curr_edge().getSrc()).getLocation();
-				double de = src.distance(dest);
-				double dist = _pos.distance(dest);
-				if(this.get_curr_fruit().get_edge()==this.get_curr_edge()) {
-					 dist = _curr_fruit.getLocation().distance(this._pos);
-				}
-				double norm = dist/de;
-				double dt = w*norm / this.getSpeed(); 
-				ddt = (long)(1000.0*dt);
-			}
-			this.set_sg_dt(ddt);
+		public void set_SDT(double dist) {
+			this.dist =dist;
+//			long ddt = ddtt;
+//			if(this._curr_edge!=null) {
+//				double w = get_curr_edge().getWeight();
+//				geo_location dest = _gg.getNode(get_curr_edge().getDest()).getLocation();
+//				geo_location src = _gg.getNode(get_curr_edge().getSrc()).getLocation();
+//				double de = src.distance(dest);
+//				double dist = _pos.distance(dest);
+//				if(this.get_curr_fruit().get_edge()==this.get_curr_edge()) {
+//					 dist = _curr_fruit.getLocation().distance(this._pos);
+//				}
+//				double norm = dist/de;
+//				double dt = w*norm / this.getSpeed();
+//				ddt = (long)(1000.0*dt);
+//			}
+//			this.set_sg_dt(ddt);
 		}
 		
 		public edge_data get_curr_edge() {
 			return this._curr_edge;
 		}
-		public long get_sg_dt() {
-			return _sg_dt;
+		public double get_sg_dt() {
+			return dist;
 		}
-		public void set_sg_dt(long _sg_dt) {
-			this._sg_dt = _sg_dt;
-		}
+		//public void set_sg_dt(long _sg_dt) {
+//			this.dist = _sg_dt;
+//		}
 	}
