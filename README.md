@@ -1,4 +1,4 @@
-# Ex2-OOP
+# The Pokemon Game
 # Directed Weighted graph 
 
 ### This is an object oriented programmin project which his main idea is based on functions.
